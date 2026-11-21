@@ -8,8 +8,9 @@ numpy>=1.26.0
 scipy>=1.13.0
 tqdm>=4.66.0
 
-# --- Retrieval: Lexical (BM25), Dense (FAISS), & Reranking (ONNX Cross-Encoder) ---
+# --- Retrieval: Lexical (BM25), Dense (Local ONNX + FAISS), & Reranking (ONNX Cross-Encoder) ---
 bm25s>=0.2.6
+fastembed>=0.4.0
 faiss-cpu>=1.8.0
 flashrank>=0.2.10
 
