@@ -19,6 +19,7 @@ __pycache__/
 # Generated indexes, embeddings & large local data caches
 data/indexes/
 data/cache/
+data/logs/
 *.faiss
 *.npy
 *.npz
