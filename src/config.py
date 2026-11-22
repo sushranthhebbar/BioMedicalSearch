@@ -24,11 +24,14 @@ class RetrievalMode(str, Enum):
     HYBRID_QE_RERANK = "hybrid_qe_rerank"
 
 
-# Standard Gemini 2.5 Flash pricing (USD per 1M tokens) for reproducible cost estimation.
+# Standard Gemini / Gemma API reference pricing (USD per 1M tokens) for reproducible cost estimation.
 # Free tier has $0 actual spend, so we report estimated equivalent API cost for trade-off analysis.
 MODEL_PRICING_PER_1M_TOKENS: Dict[str, Dict[str, float]] = {
+    "gemma-4-26b-a4b-it": {"input": 0.075, "output": 0.30},
+    "gemma-4-31b-it": {"input": 0.10, "output": 0.40},
     "gemini-2.5-flash": {"input": 0.15, "output": 0.60},
     "gemini-2.5-flash-lite": {"input": 0.075, "output": 0.30},
+    "gemini-3.5-flash-lite": {"input": 0.075, "output": 0.30},
     "gemini-2.0-flash": {"input": 0.10, "output": 0.40},
 }
 
@@ -76,17 +79,17 @@ class Settings(BaseSettings):
         default="ms-marco-MiniLM-L-12-v2", alias="RERANKER_MODEL"
     )
     gemini_generation_model: str = Field(
-        default="gemini-2.5-flash", alias="GEMINI_GENERATION_MODEL"
+        default="gemma-4-26b-a4b-it", alias="GEMINI_GENERATION_MODEL"
     )
     gemini_expansion_model: str = Field(
-        default="gemini-2.5-flash", alias="GEMINI_EXPANSION_MODEL"
+        default="gemma-4-26b-a4b-it", alias="GEMINI_EXPANSION_MODEL"
     )
     gemini_judge_model: str = Field(
-        default="gemini-2.5-flash", alias="GEMINI_JUDGE_MODEL"
+        default="gemma-4-26b-a4b-it", alias="GEMINI_JUDGE_MODEL"
     )
 
     # Rate-limit pacing (0 disables pacing)
-    gemini_rpm_limit: int = Field(default=10, alias="GEMINI_RPM_LIMIT")
+    gemini_rpm_limit: int = Field(default=25, alias="GEMINI_RPM_LIMIT")
 
     # Paths
     data_dir: Path = Field(default=PROJECT_ROOT / "data")

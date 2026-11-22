@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 import threading
 import time
 from pathlib import Path
@@ -134,13 +135,30 @@ class BiomedicalQueryExpander:
 
             self._client = genai.Client(
                 api_key=api_key,
-                http_options=types.HttpOptions(api_version="v1beta"),
+                http_options=types.HttpOptions(api_version="v1beta", timeout=45_000),
             )
         return self._client
 
     def _cache_key(self, query: str, num_expansions: int) -> str:
         normalized = " ".join(query.strip().lower().split())
         return f"{self.model_name}::{num_expansions}::{normalized}"
+
+    def get_cached_entry(
+        self,
+        query: str,
+        num_expansions: Optional[int] = None,
+    ) -> Optional[Dict[str, Any]]:
+        """Return raw cached expansion metadata (tokens, latency, cost) if present."""
+        orig_clean = " ".join((query or "").strip().split())
+        n_alts = (
+            self.num_expansions
+            if num_expansions is None
+            else max(0, int(num_expansions))
+        )
+        key = self._cache_key(orig_clean, n_alts)
+        with self._cache_lock:
+            entry = self._cache.get(key)
+            return dict(entry) if isinstance(entry, dict) else None
 
     def _load_cache(self) -> None:
         if not self.cache_path.exists():
@@ -174,13 +192,15 @@ class BiomedicalQueryExpander:
             f"Generate exactly {num_expansions} complementary biomedical alternate search queries."
         )
 
-        config = types.GenerateContentConfig(
-            system_instruction=EXPANSION_SYSTEM_PROMPT,
-            temperature=self.temperature,
-            response_mime_type="application/json",
-            response_schema=_ExpansionSchema,
-            thinking_config=types.ThinkingConfig(thinking_budget=0),
-        )
+        config_kwargs: Dict[str, Any] = {
+            "system_instruction": EXPANSION_SYSTEM_PROMPT,
+            "temperature": self.temperature,
+            "response_mime_type": "application/json",
+            "response_schema": _ExpansionSchema,
+        }
+        if self.model_name.startswith("gemini-2.5"):
+            config_kwargs["thinking_config"] = types.ThinkingConfig(thinking_budget=0)
+        config = types.GenerateContentConfig(**config_kwargs)
 
         last_exc: Optional[Exception] = None
         for attempt in range(self.max_retries):
@@ -212,12 +232,26 @@ class BiomedicalQueryExpander:
             except Exception as exc:
                 last_exc = exc
                 msg = str(exc).lower()
-                is_transient = any(
+                is_transient = isinstance(exc, (json.JSONDecodeError, TimeoutError)) or any(
                     code in msg
-                    for code in ("429", "resource_exhausted", "503", "unavailable", "rate")
+                    for code in (
+                        "429",
+                        "resource_exhausted",
+                        "503",
+                        "504",
+                        "500",
+                        "unavailable",
+                        "rate",
+                        "timeout",
+                        "timed out",
+                        "unterminated string",
+                    )
                 )
                 if is_transient and attempt + 1 < self.max_retries:
-                    backoff = 2.0 ** (attempt + 1)
+                    backoff = min(20.0, 2.0 ** (attempt + 1))
+                    m_retry = re.search(r"retry\s+in\s+(\d+(?:\.\d+)?)s", msg)
+                    if m_retry:
+                        backoff = min(65.0, max(backoff, float(m_retry.group(1)) + 1.0))
                     logger.warning(
                         "Transient Gemini expansion error (attempt %d/%d): %s. Retrying in %.1fs.",
                         attempt + 1,
@@ -290,8 +324,10 @@ class BiomedicalQueryExpander:
                         "original_query": orig_clean,
                         "expanded_queries": alternates,
                         "model_name": self.model_name,
+                        "latency_ms": latency_ms,
                         "prompt_tokens": prompt_tokens,
                         "completion_tokens": completion_tokens,
+                        "estimated_cost_usd": cost_usd,
                     }
                     self._save_cache()
 

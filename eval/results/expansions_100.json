@@ -1,0 +1,482 @@
+{
+  "231": {
+    "query_id": "231",
+    "original_query": "Do orphan and gene related CpG islands follow power-law-like distributions?",
+    "expanded_queries": [
+      "CpG island distribution patterns in orphan genes and orphan genes's DNA methylation patterns",
+      "CpG island density and scaling-law behavior in orphan genes",
+      "Statistical properties of density-scale-related CpG island distribution in orphan de novo novo-regulated-genes"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 3102.48,
+    "prompt_tokens": 126,
+    "completion_tokens": 59,
+    "estimated_cost_usd": 2.715e-05,
+    "fallback_used": false
+  },
+  "275": {
+    "query_id": "275",
+    "original_query": "Is shotgun lipidomics the direct infusion of a lipid sample into a mass spectrometer?",
+    "expanded_queries": [
+      "direct infusion mass spectrometry lipidomics methodology-based comparison",
+      "shotgun lipidomics vs electrospray ionization mass spectrometry techniques",
+      "shotgun lipidomics mechanism of direct infusion mass spectrometry"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 4990.12,
+    "prompt_tokens": 127,
+    "completion_tokens": 44,
+    "estimated_cost_usd": 2.272e-05,
+    "fallback_used": false
+  },
+  "282": {
+    "query_id": "282",
+    "original_query": "Is the Wnt protein modified by notum?",
+    "expanded_queries": [
+      "Wnt signaling pathway regulation by Notum deacylase activity",
+      "Notum inhibition of Wnt/beta-catenin pathway via porcupine-independent mechanism",
+      "Post-translational modification of Wnt proteins by the carboxylesterase-like enzyme Notum"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 5130.5,
+    "prompt_tokens": 121,
+    "completion_tokens": 58,
+    "estimated_cost_usd": 2.647e-05,
+    "fallback_used": false
+  },
+  "432": {
+    "query_id": "432",
+    "original_query": "Is it possible to detect survivin protein expression in normal human adult tissues?",
+    "expanded_queries": [
+      "survivin protein expression in non-malignant human adult tissues",
+      "survivin BIRC5 expression profile inIRC5 protein levels in healthy human somatic cells",
+      "survivin protein localization and presence in normal physiological states"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 2131.2,
+    "prompt_tokens": 126,
+    "completion_tokens": 53,
+    "estimated_cost_usd": 2.535e-05,
+    "fallback_used": false
+  },
+  "876": {
+    "query_id": "876",
+    "original_query": "Can fetal aneuploidy be detected with non-invasive prenatal testing?",
+    "expanded_queries": [
+      "NIPT for detection of fetal chromosomal abnormalities and trisomies",
+      "cell-free DNA screening for cfDNA fetal aneuploidy detection",
+      "non-invasive prenatal screening for fetal chromosomal aneuploidy"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 11983.27,
+    "prompt_tokens": 124,
+    "completion_tokens": 45,
+    "estimated_cost_usd": 2.28e-05,
+    "fallback_used": false
+  },
+  "985": {
+    "query_id": "985",
+    "original_query": "Is JTV519 (K201) a potential drug for the prevention of arrhythmias?",
+    "expanded_queries": [
+      "K201 JTV519 Na+/Ca2+ exchanger inhibitor arrhythmia prevention",
+      "JTV519 mechanism of ability to prevent cardiac arrhythmias",
+      "Na+/Ca2+ exchanger inhibition by J201 K210 JTV519 cardiac electrophysiology electrophysiological properties"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 2639.85,
+    "prompt_tokens": 132,
+    "completion_tokens": 68,
+    "estimated_cost_usd": 3.03e-05,
+    "fallback_used": false
+  },
+  "1173": {
+    "query_id": "1173",
+    "original_query": "Do Parkinson's disease patients experience stridor?",
+    "expanded_queries": [
+      "stridor in Parkinson's disease patients",
+      "laryngeal stridor and Parkinsonism, MeSH terms",
+      "dysphonia and airway obstruction in Parkinson's disease"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 1701.16,
+    "prompt_tokens": 121,
+    "completion_tokens": 41,
+    "estimated_cost_usd": 2.137e-05,
+    "fallback_used": false
+  },
+  "1434": {
+    "query_id": "1434",
+    "original_query": "Does MVIIA and MVIIC bind to the same calcium channel?",
+    "expanded_queries": [
+      "MVIIA and MVIIC venom-derived peptides binding affinity to voltage-grained-controlled calcium channels",
+      "MVIIA MVIIC peptide interaction with N-type calcium channels Cav1.2 and Cav2.1",
+      "binding site overlap between MVIIA and MVIIIC_protein_structure and calcium channel subtypes"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 3098.12,
+    "prompt_tokens": 126,
+    "completion_tokens": 75,
+    "estimated_cost_usd": 3.195e-05,
+    "fallback_used": false
+  },
+  "1745": {
+    "query_id": "1745",
+    "original_query": "Are microtubules marked by glutamylation?",
+    "expanded_queries": [
+      "microtubule post-translational modification PTMs glutamylation",
+      "tubulin glutamylation status in neurons and cilia",
+      "microtubule-associated proteins MAPs glutamylation patterns"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 1963.07,
+    "prompt_tokens": 119,
+    "completion_tokens": 47,
+    "estimated_cost_usd": 2.302e-05,
+    "fallback_used": false
+  },
+  "1896": {
+    "query_id": "1896",
+    "original_query": "Has whole exome sequencing been performed in Alzheimer patients?",
+    "expanded_queries": [
+      "whole exome sequencing Alzheimer's disease AD pathology",
+      "whole exome sequencing WES Alzheimer's disease genetic variants",
+      "Alzheimer's disease AD genomic profiling whole exome sequencing"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 36597.78,
+    "prompt_tokens": 122,
+    "completion_tokens": 45,
+    "estimated_cost_usd": 2.265e-05,
+    "fallback_used": false
+  },
+  "2067": {
+    "query_id": "2067",
+    "original_query": "Can glyburide reduce cerebral edema?",
+    "expanded_queries": [
+      "glyburide effect on cerebral edema",
+      "glyburide neuroprotection in brain swelling-related pathology",
+      "sulfonylurea-induced reduction of cerebral edema volume"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 4684.28,
+    "prompt_tokens": 119,
+    "completion_tokens": 38,
+    "estimated_cost_usd": 2.032e-05,
+    "fallback_used": false
+  },
+  "2461": {
+    "query_id": "2461",
+    "original_query": "Does Evolocumab improve cognitive function?",
+    "expanded_queries": [
+      "Evolocumab efficacy on cognitive performance and neurocognitive assessment",
+      "PCSK9 inhibitor Evolocumab and neurocognitive outcomes in patients with hyperlipidemia",
+      "Evolata-type PCSK9 inhibition and cognitive impairment prevention"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 3100.82,
+    "prompt_tokens": 119,
+    "completion_tokens": 66,
+    "estimated_cost_usd": 2.873e-05,
+    "fallback_used": false
+  },
+  "2565": {
+    "query_id": "2565",
+    "original_query": "Does armodafinil improve fatigue of glioma patients?",
+    "expanded_queries": [
+      "armodafinil fatigue glioma",
+      "armastin fatigue glioblastoma multiforme GBM",
+      "armodafinil cancer-related fatigue CRF in glioma patients"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 1701.63,
+    "prompt_tokens": 122,
+    "completion_tokens": 40,
+    "estimated_cost_usd": 2.115e-05,
+    "fallback_used": false
+  },
+  "3359": {
+    "query_id": "3359",
+    "original_query": "Is the FIP virus thought to be a mutated strain for the Feline enteric Coronavirus?",
+    "expanded_queries": [
+      "Feline infectious peritonitis (FIP) vs Feline enteric coronavirus (FECV) pathogenesis",
+      "FIP virus etiology-driven mutation from FECV strain differentiation",
+      "Feline coronavirus mutation mechanisms and FIP development"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 2833.77,
+    "prompt_tokens": 129,
+    "completion_tokens": 51,
+    "estimated_cost_usd": 2.497e-05,
+    "fallback_used": false
+  },
+  "3655": {
+    "query_id": "3655",
+    "original_query": "Does gavestinel improve outcomes of stroke patients?",
+    "expanded_queries": [
+      "gavestinel stroke outcomes clinical trial",
+      "gavestinel neuroprotection stroke recovery",
+      "gavestinel ischemic stroke management efficacy-study"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 5674.03,
+    "prompt_tokens": 121,
+    "completion_tokens": 37,
+    "estimated_cost_usd": 2.017e-05,
+    "fallback_used": false
+  },
+  "4145": {
+    "query_id": "4145",
+    "original_query": "Is atenolol metabolized by CYP2D6?",
+    "expanded_queries": [
+      "atenolol pharmacokinetics CYP2D6 metabolism",
+      "atenolol cytochrome P450 2D6 substrate-inhibitor interaction",
+      "atenolol drug metabolism pathway cytochrome P450 enzyme"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 2548.29,
+    "prompt_tokens": 121,
+    "completion_tokens": 48,
+    "estimated_cost_usd": 2.348e-05,
+    "fallback_used": false
+  },
+  "4400": {
+    "query_id": "4400",
+    "original_query": "Does the royal jelly contain proteins?",
+    "expanded_queries": [
+      "royal jelly protein composition and amino acid profile",
+      "Apis mellifera royal jelly proteome analysis",
+      "nutritional biochemistry of bee product royal jelly proteins"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 6416.48,
+    "prompt_tokens": 118,
+    "completion_tokens": 39,
+    "estimated_cost_usd": 2.055e-05,
+    "fallback_used": false
+  },
+  "638": {
+    "query_id": "638",
+    "original_query": "What is the definition of minimal absent words?",
+    "expanded_queries": [
+      "minimal absent words definition and clinical significance in speech-language pathology",
+      "minimal pairs in phonology and minimal absent words concept",
+      "minimal absent words concept in language acquisition and developmental linguistics"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 3108.57,
+    "prompt_tokens": 120,
+    "completion_tokens": 44,
+    "estimated_cost_usd": 2.22e-05,
+    "fallback_used": false
+  },
+  "1797": {
+    "query_id": "1797",
+    "original_query": "What are reactive metabolites?",
+    "expanded_queries": [
+      "metabolic activation of xenobiotics to electrophilic intermediates",
+      "pharmacokinetics of reactive metabolite formation and toxicity",
+      "mechanism of drugs-induced liver injury (drug-induced liver injury) and reactive intermediates"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 6904.44,
+    "prompt_tokens": 116,
+    "completion_tokens": 47,
+    "estimated_cost_usd": 2.28e-05,
+    "fallback_used": false
+  },
+  "2591": {
+    "query_id": "2591",
+    "original_query": "What is the proteoform?",
+    "expanded_queries": [
+      "proteoform diversity and molecular structure of protein isoforms",
+      "proteofoms in mass spectrometry based proteomics-wide analysis",
+      "post-translational modifications and genetic variants in proteoform character ofization"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 4537.29,
+    "prompt_tokens": 118,
+    "completion_tokens": 46,
+    "estimated_cost_usd": 2.265e-05,
+    "fallback_used": false
+  },
+  "2727": {
+    "query_id": "2727",
+    "original_query": "What is an exosome?",
+    "expanded_queries": [
+      "extracellular vesicles EV definition and molecular composition",
+      "exosome biogenesis and cargo-mediated intercellular signaling",
+      "biomedical utility of small extracellular vesicles sEVs in liquid biopsy"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 2554.51,
+    "prompt_tokens": 117,
+    "completion_tokens": 44,
+    "estimated_cost_usd": 2.197e-05,
+    "fallback_used": false
+  },
+  "3015": {
+    "query_id": "3015",
+    "original_query": "What are the CADD scores?",
+    "expanded_queries": [
+      "CADD score\" AND (variant_effect_prediction OR variant_patent_effect_thought_process)",
+      "CASS/CADD\" AND (pathogenicity_prediction OR functional_effect_scoring)",
+      "Combined Annotation Dependent Depletion\"\" AND (genomic_alog_effect_prediction OR clinical_Phylogenetic_conservation_conservation_score)"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 3086.59,
+    "prompt_tokens": 118,
+    "completion_tokens": 83,
+    "estimated_cost_usd": 3.375e-05,
+    "fallback_used": false
+  },
+  "3158": {
+    "query_id": "3158",
+    "original_query": "What is a mitosome?",
+    "expanded_queries": [
+      "mitosome structure and function in anaerobic eukaryotes",
+      "mitosome organelle morphology and ATP production deficiency",
+      ","
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 1697.19,
+    "prompt_tokens": 117,
+    "completion_tokens": 38,
+    "estimated_cost_usd": 2.018e-05,
+    "fallback_used": false
+  },
+  "3194": {
+    "query_id": "3194",
+    "original_query": "What is YESCARTA?",
+    "expanded_queries": [
+      "axicabtagene ciloleucel mechanism of ability to target CD19 positive B-cell malignancies",
+      "axicabtagene ciloleucel clinical efficacy and safety profile in large B-cell lymphoma",
+      "axicabtagene ciloleucel axicabtagene ciloleucel CD19 CAR-T cell therapy for B-cell lymphoma"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 3309.23,
+    "prompt_tokens": 117,
+    "completion_tokens": 85,
+    "estimated_cost_usd": 3.427e-05,
+    "fallback_used": false
+  },
+  "3308": {
+    "query_id": "3308",
+    "original_query": "What is 23andMe?",
+    "expanded_queries": [
+      "23andMe genetic testing services and consumer genomics",
+      "23andMe direct-to-consumer-to-technology-and-consumer-genomics-and-consumer-genomics",
+      "direct-to-consumer genetic testing kits and genomic data privacy"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 2285.04,
+    "prompt_tokens": 119,
+    "completion_tokens": 64,
+    "estimated_cost_usd": 2.812e-05,
+    "fallback_used": false
+  },
+  "3317": {
+    "query_id": "3317",
+    "original_query": "What are Syndecans?",
+    "expanded_queries": [
+      "Syndecan family proteoglycans structure and function",
+      "Syndecan transmembrane heparan sulfate proteoglycans function",
+      "]'s relationship to cell signaling and extracellular matrix interaction"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 1966.16,
+    "prompt_tokens": 117,
+    "completion_tokens": 42,
+    "estimated_cost_usd": 2.137e-05,
+    "fallback_used": false
+  },
+  "3729": {
+    "query_id": "3729",
+    "original_query": "What are the eRNA-producing centers (EPCs)?",
+    "expanded_queries": [
+      "eRNA-producing centers (EPCs) function and mechanism",
+      "enhancer RNA ( l-RNA) regulation of gene expression",
+      "EPCs in cellular biology and transcriptional regulation"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 2410.13,
+    "prompt_tokens": 123,
+    "completion_tokens": 43,
+    "estimated_cost_usd": 2.213e-05,
+    "fallback_used": false
+  },
+  "4147": {
+    "query_id": "4147",
+    "original_query": "What is Pseudomelanosis duodeni?",
+    "expanded_queries": [
+      "Pseudomelanosis duodeni pathology and clinical significance",
+      "Pseudodermal melanosis duodeni diagnostic imaging and endoscopic-histological-correlations",
+      "Pseudomelanosis duodeni differential diagnosis and etiology-related-findings"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 13996.38,
+    "prompt_tokens": 121,
+    "completion_tokens": 55,
+    "estimated_cost_usd": 2.558e-05,
+    "fallback_used": false
+  },
+  "4313": {
+    "query_id": "4313",
+    "original_query": "What is STATegra?",
+    "expanded_queries": [
+      "STATegra software for meta-analysis of single-cell RNA-seq data",
+      "STATegra package R programming language bioinformatics-driven statistical analysis",
+      "STATegra tool for single-cell transcriptomics meta-analysis"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 22849.45,
+    "prompt_tokens": 116,
+    "completion_tokens": 49,
+    "estimated_cost_usd": 2.34e-05,
+    "fallback_used": false
+  },
+  "4641": {
+    "query_id": "4641",
+    "original_query": "What is Cereblon?",
+    "expanded_queries": [
+      "Cereblon protein function and biological role",
+      "CRBN gene expression and molecular mechanism",
+      "&Cereblon E3 ubiquitin ligase complex components"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 2968.8,
+    "prompt_tokens": 117,
+    "completion_tokens": 43,
+    "estimated_cost_usd": 2.167e-05,
+    "fallback_used": false
+  },
+  "4715": {
+    "query_id": "4715",
+    "original_query": "What is EpiMethylTag?",
+    "expanded_queries": [
+      "EpiMethylTag\" AND (epigenetic-modifying-agent OR epigenetic-modifying-agent)",
+      "EpiMethylTag technology for DNA methylation profiling-related research",
+      "EpiMethylTag method for studying epigenetic regulation in cancer cells"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 78854.08,
+    "prompt_tokens": 117,
+    "completion_tokens": 58,
+    "estimated_cost_usd": 2.617e-05,
+    "fallback_used": false
+  },
+  "233": {
+    "query_id": "233",
+    "original_query": "List protein gel staining methods visualizing the entire protein set.",
+    "expanded_queries": [
+      "protein gel electrophoresis electrophoresis-based protein visualization methods",
+      "total protein staining techniques for SDS-PAGE",
+      "non-specific protein dyes for whole proteome visualization in polyacrylamide gels"
+    ],
+    "model_name": "gemma-4-26b-a4b-it",
+    "latency_ms": 59638.07,
+    "prompt_tokens": 122,
+    "completion_tokens": 52,
+    "estimated_cost_usd": 2.475e-05,
+    "fallback_used": false
+  }
+}
