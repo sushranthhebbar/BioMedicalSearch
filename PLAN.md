@@ -141,7 +141,7 @@ BioMedicalSearch/
 
 ---
 
-### Phase 2 — Grounded Generation, Citation Enforcement & User Interface *(Maps to Step 2: 20 marks)*
+### Phase 2 — Grounded Generation, Citation Enforcement & User Interface *(Maps to Step 2: 20 marks — Completed)*
 
 **Deliverables:** `src/generation/`, `src/pipeline.py`, `src/api/main.py`, `frontend/`, `tests/test_citations.py`, `tests/test_api.py`
 
@@ -301,8 +301,8 @@ BioMedicalSearch/
 ## 6. Verification & Definition of Done
 
 - [x] `scripts/build_indexes.py` builds BM25 and FAISS indexes over the exact same indexed `rag-mini-bioasq` passages.
-- [ ] `pytest` passes all retrieval, citation-enforcement, insufficient-evidence, and API tests.
-- [ ] Live UI clearly displays original query, expansions, ranked passages (IDs, scores, PubMed links), grounded inline-cited answer, and explicit insufficient-evidence state.
+- [x] `pytest` passes all retrieval, citation-enforcement, insufficient-evidence, and API tests.
+- [x] Live UI clearly displays original query, expansions, ranked passages (IDs, scores, PubMed links), grounded inline-cited answer, and explicit insufficient-evidence state.
 - [ ] `scripts/run_eval.py` reproducibly evaluates all 5 configurations on the exact same 100 fixed query IDs (`eval/eval_queries_100.json`) with both IR metrics and RAGAS judge scores.
 - [ ] Winning configuration is set as the app default and backed by `REPORT.md`.
 - [ ] `docs/system_design.md` and `README.md` document all 4 required system paths and all 5 required design choices.

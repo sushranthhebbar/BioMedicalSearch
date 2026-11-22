@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="api-base-url" content="" />
+  <title>Admin &amp; Metadata Dashboard — BioMedSearch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="admin-shell">
+    <header class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <a href="./" class="brand">
+          <span class="brand-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 15c6.667-6 13.333 0 20-6" />
+              <path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993" />
+              <path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993" />
+            </svg>
+          </span>
+          <div>
+            <span>BioMedSearch</span>
+            <span class="brand-sub">Admin &amp; Metadata Dashboard</span>
+          </div>
+        </a>
+        <span class="pill pill-accent" id="adminDefaultModePill">Loading config...</span>
+      </div>
+
+      <div class="admin-topbar-right">
+        <button type="button" id="refreshAdminBtn" class="btn-sidebar-link" style="flex:none;">
+          ↻ Refresh Data
+        </button>
+        <a href="./" class="btn-sidebar-link" style="flex:none;">
+          ← Back to Search UI
+        </a>
+        <button
+          type="button"
+          id="adminThemeToggleBtn"
+          class="btn-icon-sm"
+          title="Toggle light/dark theme"
+          aria-label="Toggle light or dark theme"
+        >
+          ☀
+        </button>
+      </div>
+    </header>
+
+    <main class="admin-content">
+      <div id="adminErrorBanner" class="error-banner hidden" role="alert"></div>
+
+      <nav class="admin-tabs" role="tablist">
+        <button type="button" class="admin-tab active" data-tab="overview">System &amp; Index Overview</button>
+        <button type="button" class="admin-tab" data-tab="logs">Search Metadata &amp; Audit Logs</button>
+        <button type="button" class="admin-tab" data-tab="eval">100-Query Offline Benchmark</button>
+      </nav>
+
+      <!-- ==================== TAB 1: SYSTEM & INDEX OVERVIEW ==================== -->
+      <section id="tab-overview">
+        <div class="kpi-grid" id="kpiGrid"></div>
+
+        <div class="admin-two-col">
+          <div class="panel-card">
+            <div class="panel-title">
+              <span>Corpus &amp; Dual-Index Alignment</span>
+              <span class="pill pill-accent" id="alignmentPill">Verified</span>
+            </div>
+            <table class="kv-table" id="indexMetaTable"></table>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-title">
+              <span>Active Models &amp; Generation Settings</span>
+              <span class="pill mono">rag-mini-bioasq</span>
+            </div>
+            <table class="kv-table" id="modelsMetaTable"></table>
+          </div>
+        </div>
+
+        <div class="admin-two-col">
+          <div class="panel-card">
+            <div class="panel-title">
+              <span>Pre-Generation Sufficiency Thresholds</span>
+              <span class="pill">Two-Stage Gate</span>
+            </div>
+            <table class="kv-table" id="thresholdsTable"></table>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-title">
+              <span>Logged Searches by Retrieval Mode</span>
+              <span class="pill mono" id="modeTotalPill">0</span>
+            </div>
+            <div id="modeBarsContainer"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2: LIVE SEARCH AUDIT LOGS ==================== -->
+      <section id="tab-logs" class="hidden">
+        <div class="filter-toolbar">
+          <input
+            type="text"
+            id="logSearchInput"
+            placeholder="Filter by query text, search ID, or expansion..."
+            aria-label="Filter search audit logs"
+          />
+          <select id="logModeFilter" aria-label="Filter by retrieval mode">
+            <option value="all">All Retrieval Modes</option>
+            <option value="hybrid_qe_rerank">Hybrid + QE + Rerank</option>
+            <option value="hybrid_qe">Hybrid + QE</option>
+            <option value="hybrid">Hybrid (RRF)</option>
+            <option value="dense">Dense Vector</option>
+            <option value="lexical">Lexical (BM25)</option>
+          </select>
+          <select id="logSufficientFilter" aria-label="Filter by sufficiency status">
+            <option value="all">All Outcomes</option>
+            <option value="true">Grounded Only</option>
+            <option value="false">Insufficient Evidence Only</option>
+          </select>
+          <span class="pill mono" id="logCountPill">0 records</span>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Query</th>
+                <th>Mode</th>
+                <th>Exp</th>
+                <th>Top Score</th>
+                <th>Evidence Status</th>
+                <th>Citation Valid</th>
+                <th>Latency (Ret / Gen / Total)</th>
+                <th>Tokens &amp; Cost</th>
+              </tr>
+            </thead>
+            <tbody id="logsTableBody">
+              <tr>
+                <td colspan="9" style="text-align:center;color:var(--text-muted);padding:24px;">
+                  Loading search logs...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 3: OFFLINE 100-QUERY BENCHMARK ==================== -->
+      <section id="tab-eval" class="hidden">
+        <div id="evalSummaryContainer">
+          <div class="empty-state-box">Loading offline benchmark results...</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./admin.js"></script>
+</body>
+</html>

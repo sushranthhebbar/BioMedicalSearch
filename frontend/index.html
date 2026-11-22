@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="api-base-url" content="" />
+  <title>BioMedSearch — Biomedical Hybrid Search & Grounded RAG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="appShell" class="app-shell">
+    <!-- ==================== LEFT SIDEBAR: SEARCH HISTORY ==================== -->
+    <aside class="sidebar" aria-label="Search History">
+      <div class="sidebar-header">
+        <a href="./" class="brand" id="brandHomeLink">
+          <span class="brand-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 15c6.667-6 13.333 0 20-6" />
+              <path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993" />
+              <path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993" />
+              <path d="m17 6-2.5-2.5" />
+              <path d="m14 8-1-1" />
+              <path d="m7 18 2.5 2.5" />
+              <path d="m3.5 14.5.5.5" />
+              <path d="m20 9 .5.5" />
+              <path d="m6.5 12.5 1 1" />
+              <path d="m16.5 10.5 1 1" />
+              <path d="m10 16 1.5 1.5" />
+            </svg>
+          </span>
+          <div>
+            <span>BioMedSearch</span>
+            <span class="brand-sub">PubMed / BioASQ RAG</span>
+          </div>
+        </a>
+
+        <button type="button" id="newSearchBtn" class="btn-new-search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+          New Search
+        </button>
+      </div>
+
+      <div class="sidebar-search">
+        <input
+          type="text"
+          id="historyFilterInput"
+          placeholder="Filter history..."
+          aria-label="Filter search history"
+        />
+        <button
+          type="button"
+          id="clearHistoryFilterBtn"
+          class="btn-icon-sm hidden"
+          title="Clear filter"
+          aria-label="Clear history filter"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div class="history-section-label">
+        <span>Recent Searches</span>
+        <span id="historyCount" class="mono">0</span>
+      </div>
+
+      <div id="historyList" class="history-list" role="list">
+        <div class="history-empty">No recorded searches yet.</div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="health-pill" id="healthPill">
+          <span class="status-dot neutral" id="healthDot"></span>
+          <span id="healthText">Connecting to index...</span>
+        </div>
+        <div class="sidebar-footer-actions">
+          <a href="./admin" class="btn-sidebar-link" title="Open Admin & Metadata Dashboard">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="9" />
+              <rect x="14" y="3" width="7" height="5" />
+              <rect x="14" y="12" width="7" height="9" />
+              <rect x="3" y="16" width="7" height="5" />
+            </svg>
+            Admin UI
+          </a>
+          <button
+            type="button"
+            id="themeToggleBtn"
+            class="btn-icon-sm"
+            title="Toggle light/dark theme"
+            aria-label="Toggle light or dark theme"
+          >
+            ☀
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================== CENTER PANE: QUERY, EXPANSIONS, ANSWER, CITATIONS ==================== -->
+    <main class="main-pane">
+      <div class="main-inner">
+        <!-- Global Error Banner -->
+        <div id="errorBanner" class="error-banner hidden" role="alert"></div>
+
+        <!-- LANDING STATE (Centered Perplexity-style Hero) -->
+        <section id="landingSection" class="landing-hero">
+          <div class="hero-badge">
+            <span>Hybrid BM25 + FAISS + Query Expansion + Cross-Encoder</span>
+          </div>
+          <h1>Ask a biomedical research question</h1>
+          <p>
+            Search PubMed passages from <strong>rag-mini-bioasq</strong> with hybrid retrieval,
+            code-verified inline PMID citations, and strict insufficient-evidence gating.
+          </p>
+
+          <form id="landingForm" class="composer-card">
+            <div class="composer-input-row">
+              <textarea
+                id="landingQueryInput"
+                class="composer-textarea"
+                rows="2"
+                placeholder="e.g., Is Hirschsprung disease a mendelian or a multifactorial disorder?"
+                aria-label="Biomedical question"
+                required
+              ></textarea>
+              <button type="submit" id="landingSubmitBtn" class="btn-submit">
+                Search
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+            </div>
+            <div class="composer-controls">
+              <div class="control-group">
+                <label class="control-label" for="landingModeSelect">Retrieval</label>
+                <select id="landingModeSelect" class="select-pill"></select>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="landingTopKSelect">Passages</label>
+                <select id="landingTopKSelect" class="select-pill">
+                  <option value="5">Top 5</option>
+                  <option value="10" selected>Top 10</option>
+                  <option value="15">Top 15</option>
+                </select>
+              </div>
+            </div>
+          </form>
+
+          <div class="examples-grid" id="examplesGrid">
+            <button type="button" class="example-card" data-query="Is Hirschsprung disease a mendelian or a multifactorial disorder?">
+              <span class="example-tag">Genetics · Yes/No</span>
+              <span class="example-text">Is Hirschsprung disease a mendelian or a multifactorial disorder?</span>
+            </button>
+            <button type="button" class="example-card" data-query="What is the mechanism of action of metformin in type 2 diabetes?">
+              <span class="example-tag">Pharmacology · Mechanism</span>
+              <span class="example-text">What is the mechanism of action of metformin in type 2 diabetes?</span>
+            </button>
+            <button type="button" class="example-card" data-query="Which drugs target interleukin-6 (IL-6) signaling in inflammatory diseases?">
+              <span class="example-tag">Immunology · Treatment</span>
+              <span class="example-text">Which drugs target interleukin-6 (IL-6) signaling in inflammatory diseases?</span>
+            </button>
+            <button type="button" class="example-card example-warn" data-query="What is the recipe for French chocolate lava cake with salted caramel?">
+              <span class="example-tag">Insufficient Evidence Demo</span>
+              <span class="example-text">What is the recipe for French chocolate lava cake with salted caramel?</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- ACTIVE SEARCH THREAD STATE -->
+        <section id="threadSection" class="hidden">
+          <div class="thread-top-actions">
+            <span class="pill" id="activeSearchIdPill">Search</span>
+            <button type="button" id="toggleDrawerBtn" class="btn-drawer-toggle">
+              Toggle Evidence Panel
+            </button>
+          </div>
+
+          <!-- Compact Docked Composer -->
+          <form id="threadForm" class="composer-card compact">
+            <div class="composer-input-row">
+              <textarea
+                id="threadQueryInput"
+                class="composer-textarea"
+                rows="1"
+                placeholder="Ask another biomedical question or re-run in another mode..."
+                aria-label="Biomedical question"
+                required
+              ></textarea>
+              <button type="submit" id="threadSubmitBtn" class="btn-submit">Search</button>
+            </div>
+            <div class="composer-controls">
+              <div class="control-group">
+                <label class="control-label" for="threadModeSelect">Retrieval</label>
+                <select id="threadModeSelect" class="select-pill"></select>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="threadTopKSelect">Passages</label>
+                <select id="threadTopKSelect" class="select-pill">
+                  <option value="5">Top 5</option>
+                  <option value="10" selected>Top 10</option>
+                  <option value="15">Top 15</option>
+                </select>
+              </div>
+            </div>
+          </form>
+
+          <!-- Loading Skeleton -->
+          <div id="loadingCard" class="loading-card hidden" aria-live="polite">
+            <div class="loading-steps">
+              <span class="pill pill-accent">1. Expanding biomedical query</span>
+              <span class="pill">2. BM25 + FAISS hybrid search</span>
+              <span class="pill">3. Cross-encoder rerank</span>
+              <span class="pill">4. Grounded answer &amp; citation check</span>
+            </div>
+            <div class="shimmer-line" style="width: 82%;"></div>
+            <div class="shimmer-line" style="width: 96%;"></div>
+            <div class="shimmer-line" style="width: 74%;"></div>
+          </div>
+
+          <!-- Rendered Result Container -->
+          <div id="resultContainer" class="hidden">
+            <h1 id="resultQueryHeadline" class="query-headline"></h1>
+
+            <div id="telemetryStrip" class="telemetry-strip"></div>
+
+            <!-- Query & Expansions Stepper -->
+            <div class="expansions-card" id="expansionsCard">
+              <div class="section-heading">
+                <span>Original Query &amp; Biomedical Expansions</span>
+                <span id="expansionMetaTag" class="mono"></span>
+              </div>
+              <div id="queryChips" class="query-chips"></div>
+            </div>
+
+            <!-- Explicit Insufficient Evidence Callout -->
+            <div id="insufficientCallout" class="insufficient-callout hidden" role="status">
+              <div class="insufficient-header">
+                <div class="insufficient-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                  <span>Insufficient Evidence — Grounded Answer Withheld</span>
+                </div>
+                <span id="abstentionStageBadge" class="pill pill-warning"></span>
+              </div>
+              <p id="insufficientAnswerText" class="insufficient-answer"></p>
+              <div id="insufficientReasonBox" class="insufficient-reason"></div>
+            </div>
+
+            <!-- Grounded Answer Card -->
+            <article id="answerCard" class="answer-card hidden">
+              <div class="section-heading">
+                <span>Grounded Biomedical Answer</span>
+                <span id="answerModelTag" class="mono"></span>
+              </div>
+              <div id="answerBody" class="answer-body"></div>
+              <div id="citationAuditBar" class="citation-audit-bar"></div>
+            </article>
+
+            <!-- Citations Footer (Bottom of Answer) -->
+            <section id="citationsFooter" class="citations-footer hidden">
+              <div class="section-heading">
+                <span>Cited Sources</span>
+                <span id="citedCountLabel" class="mono"></span>
+              </div>
+              <div id="citationsGrid" class="citations-grid"></div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- ==================== RIGHT SIDE PANEL: EXPANDABLE REFERENCES DRAWER ==================== -->
+    <aside class="evidence-drawer" id="evidenceDrawer" aria-label="Retrieved Evidence Passages">
+      <div class="drawer-header">
+        <div class="drawer-title-row">
+          <div class="drawer-title">
+            <span>Evidence Passages</span>
+            <span id="evidenceCountPill" class="pill mono">0</span>
+          </div>
+          <button type="button" id="expandAllBtn" class="btn-icon-sm" title="Expand or collapse all passages">
+            ⇕
+          </button>
+        </div>
+        <div class="filter-tabs" role="tablist">
+          <button type="button" class="filter-tab active" data-filter="all">All</button>
+          <button type="button" class="filter-tab" data-filter="cited">Cited</button>
+          <button type="button" class="filter-tab" data-filter="context">Top-5 Context</button>
+        </div>
+      </div>
+
+      <div id="evidenceList" class="evidence-list">
+        <div class="evidence-empty">
+          Run a biomedical search to inspect ranked passages, score breakdowns, and PubMed source links.
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
